@@ -1,0 +1,552 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #FFB266, #FFC680);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.weather-app {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 20px;
+}
+
+/* Search container and favorites */
+.search-container-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+  z-index: 100;
+}
+
+.search-container {
+  display: flex;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 12px 15px;
+  border: none;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+  outline: none;
+  background-color: #f5f5f5;
+}
+
+.search-container button {
+  padding: 12px 20px;
+  border: none;
+  background-color: #FFB266;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.search-container button:hover {
+  background-color: #FF9933;
+}
+
+.search-container button:first-of-type {
+  border-radius: 0 10px 10px 0;
+}
+
+.favorite-button {
+  padding: 12px 15px !important;
+  font-size: 18px !important;
+  background-color: #f5f5f5 !important;
+  color: #ccc !important;
+  border-radius: 0 !important;
+}
+
+.favorite-button.favorite-active {
+  color: #FFB266 !important;
+}
+
+.favorites-dropdown-button {
+  border-radius: 0 10px 10px 0 !important;
+}
+
+.favorites-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.favorites-dropdown h4 {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  margin: 0;
+}
+
+.favorites-dropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.favorites-dropdown li {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.favorites-dropdown li:hover {
+  background-color: #f5f5f5;
+}
+
+.no-favorites {
+  padding: 10px 15px;
+  font-style: italic;
+  color: #999;
+}
+
+/* Weather display */
+.weather-display {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.location {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.date {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.current-weather {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.temperature {
+  font-size: 72px;
+  font-weight: 300;
+  margin-right: 20px;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-condition {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.detail {
+  text-align: center;
+  padding: 10px;
+  min-width: 120px;
+}
+
+.detail-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.detail-value {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* Hourly forecast */
+.hourly-forecast {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.forecast-container {
+  display: flex;
+  padding: 10px 0;
+}
+
+.forecast-item {
+  min-width: 80px;
+  text-align: center;
+  padding: 10px;
+}
+
+.forecast-time {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.forecast-temp {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.forecast-icon {
+  width: 40px;
+  height: 40px;
+  margin: 5px 0;
+}
+
+/* Weekly days */
+.weekly-days {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.day-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.day-item.clickable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.day-item.clickable:hover {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+.day-name {
+  font-weight: 600;
+  width: 100px;
+}
+
+.day-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.day-temp {
+  display: flex;
+  align-items: center;
+}
+
+.day-max {
+  font-weight: 600;
+  margin-right: 10px;
+}
+
+.day-min {
+  color: #666;
+}
+
+/* Day details view */
+.day-details {
+  padding: 20px 0;
+}
+
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 0;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button:hover {
+  color: #333;
+}
+
+.day-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.day-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.day-header h3 {
+  font-size: 16px;
+  color: #666;
+  font-weight: normal;
+}
+
+.day-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 20px;
+  background-color: rgba(255, 178, 102, 0.1);
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.day-temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-max-temp {
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.day-min-temp {
+  font-size: 24px;
+  color: #666;
+}
+
+.day-condition {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.day-condition img {
+  width: 60px;
+  height: 60px;
+}
+
+.day-condition span {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.day-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.detail-item {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.hourly-breakdown h3, .astronomy-info h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+.hourly-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.hourly-item {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.hourly-time {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.hourly-condition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hourly-condition img {
+  width: 40px;
+  height: 40px;
+}
+
+.hourly-condition span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.hourly-details {
+  display: flex;
+  justify-content: space-around;
+  font-size: 14px;
+  color: #666;
+}
+
+.astronomy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.astronomy-item {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.astronomy-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.astronomy-value {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #e74c3c;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  color: #666;
+}
+
+/* Enhanced search dropdown styles */
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results h4, .favorites-list h4 {
+  padding: 10px 15px;
+  margin: 0;
+  font-size: 16px;
+  border-bottom: 1px solid #eee;
+  background-color: #f5f5f5;
+}
+
+.favorites-list {
+  border-top: 1px solid #eee;
+}
+
+.search-item, .favorite-item {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-item:hover, .favorite-item:hover {
+  background-color: #f5f5f5;
+}
+
+.search-loading, .no-results {
+  padding: 15px;
+  text-align: center;
+  color: #666;
+}
+
+.favorite-star {
+  color: #FFB266;
+  margin-left: 10px;
+}
+
+.empty-star {
+  color: #ccc;
+  margin-left: 10px;
+}
+
+@media (max-width: 600px) {
+  .weather-app {
+    padding: 15px;
+  }
+  
+  .temperature {
+    font-size: 56px;
+  }
+  
+  .weather-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .detail {
+    min-width: 100px;
+    padding: 5px;
+  }
+  
+  .day-item {
+    flex-wrap: wrap;
+  }
+  
+  .day-name {
+    width: 80px;
+  }
+  
+  .day-detail-grid,
+  .hourly-grid,
+  .astronomy-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .day-summary {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
