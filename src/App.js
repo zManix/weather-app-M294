@@ -4,6 +4,7 @@ import SearchLocation from './components/SearchLocation';
 import WeatherDisplay from './components/WeatherDisplay';
 import HourlyForecast from './components/HourlyForecast';
 import DayDetails from './components/DayDetails';
+import ActivityRecommendations from './components/ActivityRecommendations';
 
 function App() {
   const [weatherData, setWeatherData] = useState(null);
@@ -56,7 +57,7 @@ function App() {
       setLocation(searchLocation);
       setLoading(false);
     } catch (err) {
-      setError('Could not fetch weather data. Please try again.');
+      setError('Wetterdaten konnten nicht abgerufen werden. Bitte versuche es erneut.');
       setLoading(false);
       console.error('Error fetching weather data:', err);
     }
@@ -113,7 +114,7 @@ function App() {
           onToggleFavorite={() => weatherData && toggleFavorite(weatherData.location.name)}
         />
         
-        {loading && <div className="loading">Loading weather data...</div>}
+        {loading && <div className="loading">Wetterdaten werden geladen...</div>}
         
         {error && <div className="error-message">{error}</div>}
         
@@ -124,6 +125,10 @@ function App() {
               location={weatherData.location}
               forecast={weatherData.forecast}
               onDayClick={handleDayClick}
+            />
+            <ActivityRecommendations 
+              current={weatherData.current}
+              forecast={weatherData.forecast}
             />
             <HourlyForecast forecast={weatherData.forecast} />
           </>
