@@ -67,7 +67,7 @@ function SearchLocation({
     }, 300);
 
     return () => clearTimeout(timeoutId);
-  }, [searchTerm]);
+  }, [searchTerm, favorites.length]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,6 +108,7 @@ function SearchLocation({
           className={`favorite-button ${isFavorite ? 'favorite-active' : ''}`}
           onClick={onToggleFavorite}
           title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           {isFavorite ? '★' : '☆'}
         </button>
@@ -116,6 +117,7 @@ function SearchLocation({
           className="favorites-dropdown-button" 
           onClick={() => setShowDropdown(!showDropdown)}
           title="View favorites"
+          aria-label="View favorites"
         >
           ▼
         </button>
